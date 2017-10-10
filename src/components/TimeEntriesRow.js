@@ -33,6 +33,7 @@ const styles = {
   },
   taskContainer: {
     flex: 3,
+    overflow: 'hidden',
   },
   lengthContainer: {
     flex: 1,

@@ -15,7 +15,6 @@ const Header = ({ header }) => {
 
 const style = {
   viewStyle: {
-    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 20,
@@ -23,6 +22,7 @@ const style = {
   },
   textStyle: {
     fontSize: 20,
+    color: '#4283f4',
   },
 }
 
