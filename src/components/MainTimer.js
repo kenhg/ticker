@@ -1,39 +1,62 @@
 import React, { Component } from 'react'
+import { PropTypes } from 'prop-types'
 import {
   // StyleSheet,
   TouchableOpacity,
   Text,
   View,
-  // Button,
+  AsyncStorage,
 } from 'react-native'
 import Timer from './Timer'
 import TaskInput from './TaskInput'
 
 export default class MainTimer extends Component {
 
+  static propTypes = {
+    onAddEntry: PropTypes.func.isRequired,
+  }
+
   state = {
     timerOn: false,
+    task: '',
+    startTime: 0,
     // elapsedTimeInSeconds: null,
     // lastElaspedTime: null,
     // startTime: null,
   }
 
+  onTaskChange = task => this.setState({ task })
+
   stopTimer = () => {
-    this.setState({
-      timerOn: false,
-      // lastElaspedTime: this.state.elapsedTime,
+    const { task, startTime } = this.state
+    AsyncStorage.getItem('entries', (err, results) => {
+
+      const entries = JSON.parse(results)
+      const newEntry = { task: task.trim(), startTime, stopTime: Math.round(new Date().getTime() / 1000) }
+      entries.unshift(newEntry)
+
+      AsyncStorage.setItem('entries', JSON.stringify(entries), () => {
+        this.setState({
+          timerOn: false,
+          task: '',
+          startTime: 0,
+        }, this.props.onAddEntry(newEntry))
+      })
     })
   }
 
   startTimer = () => {
-    this.setState({ timerOn: true })
+    this.setState({
+      timerOn: true,
+      startTime: Math.round(new Date().getTime() / 1000),
+    })
   }
 
   render() {
-    const { timerOn } = this.state
+    const { timerOn, task } = this.state
     return (
       <View style={styles.container}>
-        <TaskInput style={styles.taskInput} />
+        <TaskInput task={task} style={styles.taskInput} onChangeText={this.onTaskChange} />
         <Timer style={styles.timer} timerOn={timerOn} />
         <View style={styles.buttonContainer}>
           <TouchableOpacity

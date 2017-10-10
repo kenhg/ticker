@@ -6,16 +6,21 @@ import {
 } from 'react-native'
 import { formatTimer } from '../utils'
 
-const TimeEntriesRow = ({ entry }) => (
-  <View style={styles.container}>
-    <View style={styles.taskContainer}>
-      <Text style={styles.task}>{entry.task}</Text>
+const TimeEntriesRow = ({ entry }) => {
+  const { task, startTime, stopTime } = entry
+  const timeDifference = stopTime - startTime
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.taskContainer}>
+        <Text style={task ? styles.task : styles.noTask}>{task || 'no description'}</Text>
+      </View>
+      <View style={styles.lengthContainer}>
+        <Text style={styles.length}>{formatTimer(timeDifference)}</Text>
+      </View>
     </View>
-    <View style={styles.lengthContainer}>
-      <Text style={styles.length}>{formatTimer(entry.length)}</Text>
-    </View>
-  </View>
-)
+  )
+}
 
 TimeEntriesRow.propTypes = {
   entry: PropTypes.object.isRequired,
@@ -39,6 +44,9 @@ const styles = {
     flex: 1,
     alignItems: 'flex-end',
   },
+  noTask: {
+    color: '#bbb'
+  }
 }
 
 export default TimeEntriesRow

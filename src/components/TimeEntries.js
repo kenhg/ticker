@@ -1,50 +1,34 @@
 import React, { Component } from 'react'
-// import { PropTypes } from 'prop-types'
+import { PropTypes } from 'prop-types'
 import {
-  View,
+  ScrollView,
   Text,
-  AsyncStorage,
 } from 'react-native'
 import TimeEntriesRow from './TimeEntriesRow'
 
-const testData = [
-  { task: 'hi', length: 1000 },
-  { task: 'second taski', length: 600 },
-  { task: 'some really long task i don\'t even know why some people like to this shit wtf is wrong with them', length: 600 },
-]
-
 export default class TimeEntries extends Component {
 
-  // static propTypes = {
-  //   style: PropTypes.object.isRequired,
-  // }
-
-  state = { entries: [] }
-
-  componentWillMount() {
-    AsyncStorage.setItem('entries', JSON.stringify(testData), () => {
-      AsyncStorage.getItem('entries', (err, entries) => {
-        this.setState({ entries: JSON.parse(entries) })
-      })
-    })
+  static propTypes = {
+    entries: PropTypes.array.isRequired,
   }
 
   render() {
-    const { entries } = this.state
+    const { entries } = this.props
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text style={styles.heading}>Entries</Text>
         {entries.map((entry, i) => (
           <TimeEntriesRow key={i} entry={entry} />
         ))}
-      </View>
+      </ScrollView>
     )
   }
 }
 
 const styles = {
   container: {
+    // flex: 1,
     shadowColor: '#ccc',
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.3,

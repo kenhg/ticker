@@ -9,25 +9,29 @@ export default class TaskInput extends Component {
 
   static propTypes = {
     style: PropTypes.object.isRequired,
+    onChangeText: PropTypes.func.isRequired,
+    task: PropTypes.string.isRequired,
   }
 
-  state = { task: '' }
-
   render() {
-    const { style } = this.props
+    const { style, onChangeText, task } = this.props
     return (
       <View style={style}>
         <TextInput
           autoCorrect={false}
-          value={this.state.task}
-          onChangeText={task => this.setState({ task })}
+          value={task}
+          onChangeText={onChangeText}
           placeholder="description"
-          style={{
-            paddingLeft: 10,
-            paddingRight: 10,
-          }}
+          style={styles.inputStyles}
         />
       </View>
     )
   }
+}
+
+const styles = {
+  inputStyles: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
 }

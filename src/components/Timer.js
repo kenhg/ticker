@@ -26,13 +26,17 @@ export default class Timer extends Component {
     if (!nextProps.timerOn && this.props.timerOn) this.setState({ elapsed: 0 }) // clear elapsed if timer is reset
   }
 
-  componentDidUpdate() {
-    if (this.props.timerOn) {
-      this.timer = setTimeout(() => this.setState({ elapsed: this.state.elapsed + 1 }), 1000)
+  componentDidUpdate(prevProps) {
+    if (!prevProps.timerOn && this.props.timerOn) {
+      this.timer = setInterval(() => this.setState({ elapsed: this.state.elapsed + 1 }), 1000)
     }
-    else {
-      clearTimeout(this.timer)
+    else if (prevProps.timerOn && !this.props.timerOn) {
+      clearInterval(this.timer)
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
   }
 
   render() {
