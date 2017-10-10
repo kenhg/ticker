@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
-import { PropTypes } from 'prop-types'
+// import { PropTypes } from 'prop-types'
 import {
   View,
-  TextInput,
+  Text,
   AsyncStorage,
 } from 'react-native'
+import TimeEntriesRow from './TimeEntriesRow'
+
+const testData = [
+  { task: 'hi', length: 1000 },
+  { task: 'second taski', length: 600 },
+]
 
 export default class TimeEntries extends Component {
 
@@ -12,25 +18,25 @@ export default class TimeEntries extends Component {
   //   style: PropTypes.object.isRequired,
   // }
 
-  state = { task: '' }
+  state = { entries: [] }
 
   componentWillMount() {
-    // AsyncStorage.setItem
+    AsyncStorage.setItem('entries', JSON.stringify(testData), () => {
+      AsyncStorage.getItem('entries', (err, entries) => {
+        this.setState({ entries: JSON.parse(entries) })
+      })
+    })
   }
 
   render() {
+    const { entries } = this.state
+
     return (
       <View style={styles.container}>
-        <TextInput
-          autoCorrect={false}
-          value={this.state.task}
-          onChangeText={task => this.setState({ task })}
-          placeholder="description"
-          style={{
-            paddingLeft: 10,
-            paddingRight: 10,
-          }}
-        />
+        <Text style={styles.heading}>Entries</Text>
+        {entries.map((entry, i) => (
+          <TimeEntriesRow key={i} entry={entry} />
+        ))}
       </View>
     )
   }
@@ -43,5 +49,12 @@ const styles = {
     shadowOpacity: 0.1,
     shadowRadius: 3,
     padding: 10,
+    // justifyContent: 'space-around',
+  },
+  heading: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    fontWeight: '600',
+    fontSize: 16,
   },
 }

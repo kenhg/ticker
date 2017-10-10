@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
 import {
-  StyleSheet,
+  // StyleSheet,
+  TouchableOpacity,
   Text,
   View,
-  Button,
+  // Button,
 } from 'react-native'
 import Timer from './Timer'
 import TaskInput from './TaskInput'
 
-export default class Main extends Component {
+export default class MainTimer extends Component {
 
   state = {
     timerOn: false,
-    elapsedTimeInSeconds: null,
-    lastElaspedTime: null,
-    startTime: null,
+    // elapsedTimeInSeconds: null,
+    // lastElaspedTime: null,
+    // startTime: null,
   }
 
   stopTimer = () => {
     this.setState({
       timerOn: false,
-      lastElaspedTime: this.state.elapsedTime,
+      // lastElaspedTime: this.state.elapsedTime,
     })
   }
 
@@ -35,10 +36,11 @@ export default class Main extends Component {
         <TaskInput style={styles.taskInput} />
         <Timer style={styles.timer} timerOn={timerOn} />
         <View style={styles.buttonContainer}>
-          <Button
+          <TouchableOpacity
             onPress={timerOn ? this.stopTimer : this.startTimer}
-            title={timerOn ? 'Stop' : 'Start'}
-          />
+          >
+            <Text style={styles.buttonText}>{timerOn ? 'Stop' : 'Start'}</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -71,5 +73,9 @@ const styles = {
   },
   buttonContainer: {
     flex: 1,
+    alignItems: 'flex-end',
+  },
+  buttonText: {
+    color: '#4283f4',
   },
 }
