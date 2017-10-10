@@ -45,8 +45,8 @@ const styles = {
     alignItems: 'flex-end',
   },
   noTask: {
-    color: '#bbb'
-  }
+    color: '#bbb',
+  },
 }
 
 export default TimeEntriesRow

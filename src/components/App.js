@@ -12,7 +12,7 @@ import {
 import Header from './Header'
 import Main from './Main'
 
-export default class App extends Component<{}> {
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>

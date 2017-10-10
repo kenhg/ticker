@@ -28,13 +28,11 @@ export default class TimeEntries extends Component {
 
 const styles = {
   container: {
-    // flex: 1,
     shadowColor: '#ccc',
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
     padding: 10,
-    // justifyContent: 'space-around',
   },
   heading: {
     paddingTop: 5,

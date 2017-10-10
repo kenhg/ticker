@@ -48,7 +48,3 @@ export default class Timer extends Component {
     )
   }
 }
-
-// const styles = StyleSheet.create({
-//
-// })

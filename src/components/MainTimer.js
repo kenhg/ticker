@@ -20,9 +20,6 @@ export default class MainTimer extends Component {
     timerOn: false,
     task: '',
     startTime: 0,
-    // elapsedTimeInSeconds: null,
-    // lastElaspedTime: null,
-    // startTime: null,
   }
 
   onTaskChange = task => this.setState({ task })
