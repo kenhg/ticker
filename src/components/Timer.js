@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import {
-  StyleSheet,
   Text,
   View,
 } from 'react-native'
+import { formatTimer } from '../utils'
 
 export default class Timer extends Component {
   static propTypes = {
     timerOn: PropTypes.bool.isRequired,
+    style: PropTypes.object.isRequired,
   }
 
   constructor() {
@@ -34,20 +35,11 @@ export default class Timer extends Component {
     }
   }
 
-  formatTimer = () => {
-    const { elapsed } = this.state
-
-    const seconds = `0${Math.floor(elapsed % 60)}`.slice(-2)
-    const minutes = `0${Math.floor(elapsed / 60)}`.slice(-2)
-    const hours = `0${Math.floor(minutes / 60)}`.slice(-2)
-
-    return `${hours}:${minutes}:${seconds}`
-  }
-
   render() {
+    const { style } = this.props
     return (
-      <View>
-        <Text>{this.formatTimer()}</Text>
+      <View style={style}>
+        <Text>{formatTimer(this.state.elapsed)}</Text>
       </View>
     )
   }

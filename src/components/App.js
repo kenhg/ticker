@@ -10,14 +10,16 @@ import {
   View,
 } from 'react-native'
 import Header from './Header'
-import Main from './Main'
+import MainTimer from './MainTimer'
+import TimeEntries from './TimeEntries'
 
 export default class App extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
         <Header header="Ticker" />
-        <Main />
+        <MainTimer />
+        <TimeEntries />
       </View>
     )
   }
@@ -26,6 +28,10 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 })
