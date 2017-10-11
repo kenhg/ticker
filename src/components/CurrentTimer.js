@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import {
-  // StyleSheet,
-  TouchableOpacity,
-  Text,
   View,
   AsyncStorage,
 } from 'react-native'
 import Timer from './Timer'
+import TimerButton from './TimerButton'
 import TaskInput from './TaskInput'
 
-export default class MainTimer extends Component {
+export default class CurrentTimer extends Component {
 
   static propTypes = {
     onAddEntry: PropTypes.func.isRequired,
@@ -53,15 +51,9 @@ export default class MainTimer extends Component {
     const { timerOn, task } = this.state
     return (
       <View style={styles.container}>
-        <TaskInput task={task} style={styles.taskInput} onChangeText={this.onTaskChange} />
-        <Timer style={styles.timer} timerOn={timerOn} />
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={timerOn ? this.stopTimer : this.startTimer}
-          >
-            <Text style={styles.buttonText}>{timerOn ? 'Stop' : 'Start'}</Text>
-          </TouchableOpacity>
-        </View>
+        <TaskInput task={task} containerStyle={styles.taskInput} onChangeText={this.onTaskChange} />
+        <Timer containerStyle={styles.timer} timerOn={timerOn} />
+        <TimerButton containerStyle={styles.buttonContainer} timerOn={timerOn} stopTimer={this.stopTimer} startTimer={this.startTimer} />
       </View>
     )
   }
@@ -69,7 +61,6 @@ export default class MainTimer extends Component {
 
 const styles = {
   container: {
-    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -94,8 +85,5 @@ const styles = {
   buttonContainer: {
     flex: 1,
     alignItems: 'flex-end',
-  },
-  buttonText: {
-    color: '#4283f4',
   },
 }

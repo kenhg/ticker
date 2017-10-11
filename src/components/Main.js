@@ -10,7 +10,7 @@ import {
   View,
   AsyncStorage,
 } from 'react-native'
-import MainTimer from './MainTimer'
+import CurrentTimer from './CurrentTimer'
 import TimeEntries from './TimeEntries'
 
 export default class Main extends Component<{}> {
@@ -33,7 +33,7 @@ export default class Main extends Component<{}> {
     const { entries } = this.state
     return (
       <View style={styles.container}>
-        <MainTimer entries={entries} onAddEntry={this.onAddEntry} />
+        <CurrentTimer entries={entries} onAddEntry={this.onAddEntry} />
         <TimeEntries entries={entries} />
       </View>
     )

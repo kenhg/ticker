@@ -9,7 +9,7 @@ import { formatTimer } from '../utils'
 export default class Timer extends Component {
   static propTypes = {
     timerOn: PropTypes.bool.isRequired,
-    style: PropTypes.object.isRequired,
+    containerStyle: PropTypes.object.isRequired,
   }
 
   constructor() {
@@ -40,9 +40,9 @@ export default class Timer extends Component {
   }
 
   render() {
-    const { style } = this.props
+    const { containerStyle } = this.props
     return (
-      <View style={style}>
+      <View style={containerStyle}>
         <Text>{formatTimer(this.state.elapsed)}</Text>
       </View>
     )

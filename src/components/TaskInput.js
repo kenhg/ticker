@@ -8,15 +8,15 @@ import {
 export default class TaskInput extends Component {
 
   static propTypes = {
-    style: PropTypes.object.isRequired,
+    containerStyle: PropTypes.object.isRequired,
     onChangeText: PropTypes.func.isRequired,
     task: PropTypes.string.isRequired,
   }
 
   render() {
-    const { style, onChangeText, task } = this.props
+    const { containerStyle, onChangeText, task } = this.props
     return (
-      <View style={style}>
+      <View style={containerStyle}>
         <TextInput
           autoCorrect={false}
           value={task}
