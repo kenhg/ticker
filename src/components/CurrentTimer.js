@@ -3,11 +3,13 @@ import { PropTypes } from 'prop-types'
 import {
   View,
   AsyncStorage,
+  TouchableOpacity,
 } from 'react-native'
 import Timer from './Timer'
 import TimerButton from './TimerButton'
 import TaskInput from './TaskInput'
-import { getTimeNow } from '../utils'
+import { getTimeNow, getTimeDifference } from '../utils'
+import { Actions } from 'react-native-router-flux'
 
 export default class CurrentTimer extends Component {
 
@@ -49,10 +51,12 @@ export default class CurrentTimer extends Component {
   }
 
   render() {
-    const { timerOn, task } = this.state
+    const { timerOn, task, startTime } = this.state
     return (
       <View style={styles.container}>
-        <TaskInput task={task} containerStyle={styles.taskInput} onChangeText={this.onTaskChange} />
+        <TouchableOpacity onPress={() => Actions.entryDetail({ entry: { startTime, task }, elapsed: getTimeDifference(startTime || getTimeNow()) })}>
+          <TaskInput task={task} containerStyle={styles.taskInput} onChangeText={this.onTaskChange} />
+        </TouchableOpacity>
         <Timer containerStyle={styles.timer} timerOn={timerOn} />
         <TimerButton containerStyle={styles.buttonContainer} timerOn={timerOn} stopTimer={this.stopTimer} startTimer={this.startTimer} />
       </View>

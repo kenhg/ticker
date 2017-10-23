@@ -8,6 +8,7 @@
 		"ios": "react-native run-ios"
 	},
 	"dependencies": {
+		"moment": "^2.19.1",
 		"react": "16.0.0-beta.5",
 		"react-native": "0.49.1",
 		"react-native-fontawesome": "^5.7.0",
