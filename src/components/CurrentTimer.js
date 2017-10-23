@@ -26,8 +26,8 @@ export default class CurrentTimer extends Component {
     const { task, startTime } = this.state
     AsyncStorage.getItem('entries', (err, results) => {
 
-      const entries = JSON.parse(results)
-      const newEntry = { task: task.trim(), startTime, stopTime: Math.round(new Date().getTime() / 1000) }
+      const entries = JSON.parse(results) || []
+      const newEntry = { task: task.trim(), startTime, stopTime: new Date().toISOString() }
       entries.unshift(newEntry)
 
       AsyncStorage.setItem('entries', JSON.stringify(entries), () => {
@@ -43,7 +43,7 @@ export default class CurrentTimer extends Component {
   startTimer = () => {
     this.setState({
       timerOn: true,
-      startTime: Math.round(new Date().getTime() / 1000),
+      startTime: new Date().toISOString(),
     })
   }
 

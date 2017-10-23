@@ -19,8 +19,10 @@ export default class Main extends Component<{}> {
 
   componentWillMount() {
     AsyncStorage.getItem('entries', (err, entries) => {
-      this.setState({ entries: JSON.parse(entries) })
+      this.setState({ entries: entries ? JSON.parse(entries) : [] })
     })
+
+    // AsyncStorage.removeItem('entries')
   }
 
   onAddEntry = (newEntry) => {

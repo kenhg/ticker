@@ -4,11 +4,10 @@ import {
   View,
   Text,
 } from 'react-native'
-import { formatTimer } from '../utils'
+import { formatTimer, getTimeDifference } from '../utils'
 
 const TimeEntriesRow = ({ entry }) => {
   const { task, startTime, stopTime } = entry
-  const timeDifference = stopTime - startTime
 
   return (
     <View style={styles.container}>
@@ -16,7 +15,7 @@ const TimeEntriesRow = ({ entry }) => {
         <Text style={task ? styles.task : styles.noTask}>{task || 'no description'}</Text>
       </View>
       <View style={styles.lengthContainer}>
-        <Text style={styles.length}>{formatTimer(timeDifference)}</Text>
+        <Text style={styles.length}>{formatTimer(getTimeDifference(startTime, stopTime))}</Text>
       </View>
     </View>
   )
