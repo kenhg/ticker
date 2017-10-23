@@ -10,8 +10,10 @@ const formatTimer = (value) => {
   return `${hours}:${displayMinutes}:${displaySeconds}`
 }
 
+const getTimeNow = () => new Date().toISOString()
+
 const convertISOtoSeconds = iso => Math.round(new Date(iso).getTime() / 1000)
 
 const getTimeDifference = (start, stop) => convertISOtoSeconds(stop) - convertISOtoSeconds(start)
 
-export { formatTimer, convertISOtoSeconds, getTimeDifference }
+export { formatTimer, convertISOtoSeconds, getTimeDifference, getTimeNow }
