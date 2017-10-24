@@ -4,19 +4,23 @@ import {
   Text,
   View,
 } from 'react-native'
-import { formatTimer } from '../utils'
+import { formatTimer, getTimeDifference } from '../utils'
 
 export default class Timer extends Component {
   static propTypes = {
     timerOn: PropTypes.bool.isRequired,
+    startTime: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
     containerStyle: PropTypes.object.isRequired,
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
-      elapsed: 0,
+      elapsed: getTimeDifference(props.startTime),
     }
 
     this.timer = null
@@ -28,7 +32,7 @@ export default class Timer extends Component {
 
   componentDidUpdate(prevProps) {
     if (!prevProps.timerOn && this.props.timerOn) {
-      this.timer = setInterval(() => this.setState({ elapsed: this.state.elapsed + 1 }), 1000)
+      this.timer = setInterval(() => this.setState({ elapsed: getTimeDifference(this.props.startTime) }), 500)
     }
     else if (prevProps.timerOn && !this.props.timerOn) {
       clearInterval(this.timer)

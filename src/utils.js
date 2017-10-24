@@ -8,6 +8,7 @@ const convertISOtoSeconds = iso => Math.round(new Date(iso).getTime() / 1000)
 
 const getTimeDifference = (start, stop) => {
   if (!stop) stop = getTimeNow()
+  if (!start) start = getTimeNow()
   return convertISOtoSeconds(stop) - convertISOtoSeconds(start)
 }
 

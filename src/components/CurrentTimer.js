@@ -57,7 +57,7 @@ export default class CurrentTimer extends Component {
         <TouchableOpacity onPress={() => Actions.entryDetail({ entry: { startTime, task }, elapsed: getTimeDifference(startTime || getTimeNow()) })}>
           <TaskInput task={task} containerStyle={styles.taskInput} onChangeText={this.onTaskChange} />
         </TouchableOpacity>
-        <Timer containerStyle={styles.timer} timerOn={timerOn} />
+        <Timer containerStyle={styles.timer} timerOn={timerOn} startTime={startTime} />
         <TimerButton containerStyle={styles.buttonContainer} timerOn={timerOn} stopTimer={this.stopTimer} startTimer={this.startTimer} />
       </View>
     )

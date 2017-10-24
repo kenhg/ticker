@@ -6,7 +6,7 @@ import {
   // TouchableOpacity,
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import { formatDateTime } from '../utils'
+import { formatDateTime, getTimeDifference } from '../utils'
 
 export default class EntryDetail extends Component {
 
@@ -27,7 +27,7 @@ export default class EntryDetail extends Component {
   componentWillMount() {
     const { entry } = this.props
     if (!entry.stopTime && entry.startTime) {
-      this.timer = setInterval(() => this.setState({ elapsed: this.state.elapsed + 1 }, () => Actions.refresh({ elapsed: this.state.elapsed })), 1000)
+      this.timer = setInterval(() => this.setState({ elapsed: getTimeDifference(entry.startTime) }, () => Actions.refresh({ elapsed: this.state.elapsed })), 500)
     }
     else {
       clearInterval(this.timer)
